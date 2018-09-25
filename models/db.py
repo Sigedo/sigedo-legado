@@ -54,7 +54,7 @@ else:
 # by default give a view/generic.extension to all actions from localhost
 # none otherwise. a pattern can be 'controller/function.extension'
 # -------------------------------------------------------------------------
-response.generic_patterns = [] 
+response.generic_patterns = []
 if request.is_local and not configuration.get('app.production'):
     response.generic_patterns.append('*')
 
@@ -85,6 +85,9 @@ response.form_label_separator = ''
 # (more options discussed in gluon/tools.py)
 # -------------------------------------------------------------------------
 
+# Conexão MYSQL
+db = DAL('mysql://root:toor@127.0.0.1/sigedo')
+
 # host names must be a list of allowed host names (glob syntax allowed)
 auth = Auth(db, host_names=configuration.get('host.names'))
 
@@ -93,6 +96,9 @@ auth = Auth(db, host_names=configuration.get('host.names'))
 # -------------------------------------------------------------------------
 auth.settings.extra_fields['auth_user'] = []
 auth.define_tables(username=False, signature=False)
+
+# configuração de redirecionamento para a pagina de configuração
+auth.settings.login_next = URL('default','level')
 
 # -------------------------------------------------------------------------
 # configure email
@@ -111,8 +117,8 @@ auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = True
 
-# -------------------------------------------------------------------------  
-# read more at http://dev.w3.org/html5/markup/meta.name.html               
+# -------------------------------------------------------------------------
+# read more at http://dev.w3.org/html5/markup/meta.name.html
 # -------------------------------------------------------------------------
 response.meta.author = configuration.get('app.author')
 response.meta.description = configuration.get('app.description')
@@ -121,7 +127,7 @@ response.meta.generator = configuration.get('app.generator')
 response.show_toolbar = configuration.get('app.toolbar')
 
 # -------------------------------------------------------------------------
-# your http://google.com/analytics id                                      
+# your http://google.com/analytics id
 # -------------------------------------------------------------------------
 response.google_analytics_id = configuration.get('google.analytics_id')
 
@@ -153,3 +159,19 @@ if configuration.get('scheduler.enabled'):
 # after defining tables, uncomment below to enable auditing
 # -------------------------------------------------------------------------
 # auth.enable_record_versioning(db)
+
+Aluno = db.define_table('aluno',
+    Field('cpf', 'string', label='CPF'),
+    Field('identidade', 'string', label='Identidade'),
+    Field('nome', 'string', label='Nome'),
+    Field('civil', 'string', label='Estado Civil'),
+    Field('data_nascimento', 'date', label="Data Nascimento"),
+    Field('curso', 'string', label='Curso'),
+    Field('periodo', 'integer', label='Periodo'),
+    Field('endereco', 'text', label='Endereço'),
+    Field('email', 'string', label="E-Mail"),
+    Field('telefone', 'string', label="Telefone"),
+    auth.signature,
+    format = "%(nome)s",
+    primarykey=['cpf']
+    )
