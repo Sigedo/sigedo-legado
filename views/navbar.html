@@ -1,25 +1,32 @@
 
-<!-- Dropdown Structure -->
+<!-- Dropdown Login Structure -->
 <ul id="dropdown-login" class="dropdown-content">
   {{if auth.user:}}
-    <li><a href="{{=URL('default','user/profile')}}">Perfil</a></li>
-    <li><a href="{{=URL('default','user/change_password')}}">Trocar Senha</a></li>
-    <li class="divider"></li>
-    <li><a href="{{=URL('default','user/logout')}}">Sair</a></li>
+  <li><a href="{{=URL('default','user/profile')}}">Perfil</a></li>
+  <li><a href="{{=URL('default','user/change_password')}}">Trocar Senha</a></li>
+  <li class="divider"></li>
+  <li><a href="{{=URL('default','user/logout')}}">Sair</a></li>
   {{else:}}
-    <li><a href="{{=URL('default','user/login')}}">Entrar</a></li>
-    <li><a href="{{=URL('default','user/register')}}">Cadastrar</a></li>
-    <li class="divider"></li>
-    <li><a href="{{=URL('default','user/retrieve_password')}}">Resetar Senha</a></li>
+  <li><a href="{{=URL('default','user/login')}}">Entrar</a></li>
+  <li><a href="{{=URL('default','user/register')}}">Cadastrar</a></li>
+  <li class="divider"></li>
+  <li><a href="{{=URL('default','user/retrieve_password')}}">Resetar Senha</a></li>
   {{pass}}
 </ul>
 
+<!-- Dropdown aluno Structure -->
+<ul id="dropdown-aluno" class="dropdown-content">
+  <li><a href="{{=URL('default','cadastro_aluno')}}">Cadastrar aluno</a></li>
+  <li><a href="{{=URL('default','ver_aluno')}}">Visualizar alunos</a></li>
+  <li class="divider"></li>
+  <li><a href="{{=URL('default','user/logout')}}">Sair</a></li>
+</ul>
 
 <nav class="blue darken-4" role="navigation">
   <div class="nav-wrapper container">
-    <a id="logo-container" href="#" class="brand-logo">SIGEDO</a>
+    <a id="logo-container" href="{{=URL('default','level')}}" class="brand-logo">SIGEDO</a>
     <ul class="right hide-on-med-and-down">
-      <li><a href="#">Navbar Link</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Aluno<i class="material-icons right">arrow_drop_down</i></a></li>
       <li><a href="#">Navbar Link</a></li>
       <li><a href="#">Navbar Link</a></li>
       <!-- Dropdown Trigger -->
@@ -36,9 +43,9 @@
 
 <script>
 
-  $(document).ready(function(){
-    $('.sidenav').sidenav();
-    $(".dropdown-trigger").dropdown({constrainWidth: false});
-  });
+$(document).ready(function(){
+  $('.sidenav').sidenav();
+  $(".dropdown-trigger").dropdown({constrainWidth: false});
+});
 
 </script>

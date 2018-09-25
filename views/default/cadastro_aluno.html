@@ -1,0 +1,113 @@
+{{extend 'layout.html'}}
+
+{{=form.custom.begin}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}<br>
+	<div class="container">
+		<h5 class="header col s12 light">Cadastrar Aluno</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div style="text-align: center;"><i class="large material-icons blue-text text-darken-4">person_add</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#aluno_nome')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.nome}}
+								<label for="aluno_nome">Nome</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s6">
+								{{form.elements('#aluno_cpf')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.cpf}}
+								<label for="aluno_cpf">CPF</label>
+							</div>
+							<div class="input-field col s6">
+								{{form.elements('#aluno_identidade')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.identidade}}
+								<label for="aluno_identidade">Identidade</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s6">
+								{{form.elements('#aluno_data_nascimento')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.data_nascimento}}
+								<label for="aluno_data_nascimento">Data Nascimento</label>
+							</div>
+
+							<div class="input-field col s6">
+								{{form.elements('#aluno_civil')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.civil}}
+								<label for="aluno_civil">Estado Civil</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s6">
+								{{form.elements('#aluno_curso')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.curso}}
+								<label for="aluno_curso">Curso</label>
+							</div>
+
+							<div class="input-field col s6">
+								{{form.elements('#aluno_periodo')[0]['_class'] = "validate" }}
+								{{form.elements('#aluno_periodo')[0]['_type'] = "number" }}
+								{{=form.custom.widget.periodo}}
+								<label for="aluno_periodo">Periodo</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#aluno_email')[0]['_class'] = "validate" }}
+								{{form.elements('#aluno_email')[0]['_type'] = "email" }}
+								<i class="material-icons prefix blue-text text-darken-4">email</i>
+								{{=form.custom.widget.email}}
+								<label for="aluno_email">E-mail</label>
+								<span class="helper-text" data-error="E-mail incorreto" data-success="E-mail valido"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#aluno_telefone')[0]['_class'] = "validate" }}
+								<i class="material-icons prefix blue-text text-darken-4">phone</i>
+								{{=form.custom.widget.telefone}}
+								<label for="aluno_telefone">Telefone</label>
+							</div>
+						</div>
+						<br>
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#aluno_endereco')[0]['_class'] = "materialize-textarea" }}
+								{{=form.custom.widget.endereco}}
+								<label for="aluno_endereco">Endereço</label>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+				<button class="btn waves-effect waves-light right" type="submit" name="action">Cadastrar
+					<i class="material-icons right">add</i>
+				</button>
+			</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+</div>
+<br><br><br><br>
+
+</body>
+
+{{=form.custom.end}}

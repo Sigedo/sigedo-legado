@@ -1,33 +1,53 @@
 {{extend 'layout.html'}}
 
-<div class="row"> 
-  <div id="web2py_user_form" class="col-lg-6" style="background-color:white; margin: 0 auto 5px auto; box-shadow: 0 0 5px #a1a1a1; border-radius:5px;padding: 20px">
-    <h2>
-      {{=T('Sign Up') if request.args(0) == 'register' else T('Log In') if request.args(0) == 'login' else T(request.args(0).replace('_',' ').title())}}
-    </h2>
-    {{=form}}
-    {{if request.args(0)=='login' and not 'register' in auth.settings.actions_disabled:}}
-    <a href="{{=URL('user/register')}}">{{=T('Register')}}</a>
-    <br/>
-    {{pass}}
-    {{if request.args(0)=='login' and not 'retrieve_password' in auth.settings.actions_disabled:}}
-    <a href="{{=URL('user/retrieve_password')}}">{{=T('Lost your password?')}}</a>
-    {{pass}}
-    {{if request.args(0)=='register':}}
-    <a href="{{=URL('user/login')}}">{{=T('Login')}}</a>
-    {{pass}}
+
+<body class="grey lighten-3">
+{{include "navbar.html"}}
+  <div class="container">
+    <h4>
+      {{=T('register') if request.args(0) == 'register' else T('login') if request.args(0) == 'login' else T(request.args(0).replace('_',' ').title())}}
+    </h4>
+
+    <div class="row">
+      <div class="col s12 l8 offset-l2 m8 offset-m2">
+        <div class="card-panel hoverable"><br>
+          <div class="row center">
+            <i class="large material-icons blue-text text-darken-4 center">account_circle</i>
+            <br><br>
+          </div>
+          <div id="web2py_user_form" class="row">
+            <div class="container">
+
+              {{
+                if request.args(0)=='login':
+                if not 'register' in auth.settings.actions_disabled:
+                form.add_button(T('Sign Up'),URL(args='register', vars={'_next': request.vars._next} if request.vars._next else None),_class='btn btn-default')
+                pass
+                if not 'request_reset_password' in auth.settings.actions_disabled:
+                form.add_button(T('Reset'),URL(args='request_reset_password'),_class='btn btn-default')
+                pass
+                pass
+                =form
+              }}
+
+              <br><br>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</div>
 
 
-
-{{block page_js}}
-<script>
-    jQuery("#web2py_user_form input:visible:enabled:first").focus();
-{{if request.args(0)=='register':}}
-    web2py_validate_entropy(jQuery('#auth_user_password'),100);
-{{elif request.args(0)=='change_password':}}
-    web2py_validate_entropy(jQuery('#no_table_new_password'),100);
-{{pass}}
+  {{block page_js}}
+  <script>
+  jQuery("#web2py_user_form input:visible:enabled:first").focus();
+  {{if request.args(0)=='register':}}
+  web2py_validate_entropy(jQuery('#auth_user_password'),100);
+  {{elif request.args(0)=='change_password':}}
+  web2py_validate_entropy(jQuery('#no_table_new_password'),100);
+  {{pass}}
 </script>
 {{end page_js}}
+</body>
+<br><br><br><br><br><br>
