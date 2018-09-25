@@ -4,10 +4,13 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 
-# ---- example index page ----
+# ---- index page ----
 def index():
-    response.flash = T("Hello World")
-    return dict(message=T('Welcome to web2py!'))
+    return dict()
+
+# ---- index2 page ----
+def level():
+    return dict()
 
 # ---- API (example) -----
 @auth.requires_login()
@@ -27,7 +30,7 @@ def grid():
 # ---- Embedded wiki (example) ----
 def wiki():
     auth.wikimenu() # add the wiki to the menu
-    return auth.wiki() 
+    return auth.wiki()
 
 # ---- Action for login/register/etc (required for auth) -----
 def user():
@@ -56,3 +59,68 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
+
+# ---- CRUD ALUNO -----
+
+def cadastro_aluno():
+    form = SQLFORM(Aluno)
+    if form.process().accepted:
+        session.flash = 'Novo aluno: %s' % form.vars.nome
+        redirect(URL('cadastro_aluno'))
+    elif form.errors:
+        response.flash = 'Erros encontrados no formulário'
+    else:
+        if not response.flash:
+            response.flash = 'Preencha o formulário'
+    return dict(form=form)
+
+
+def ver_aluno():
+    if 'edit' in request.args:
+        edit = request.args
+        response.flash = edit
+        parametro = edit[2]
+        url = 'editar_aluno/' + parametro
+        redirect(URL(url))
+    if 'view' in request.args:
+        # db.fornecedor.id.readable = False # or writable
+        view = request.args
+        response.flash = view
+        parametro = view[2]
+        url = 'aluno_detalhe/' + str(parametro)
+        redirect(URL(url))
+
+    grid = SQLFORM.grid(Aluno, create=False, advanced_search = False,
+    fields=[
+            db.aluno.nome,
+            db.aluno.curso,
+            db.aluno.periodo,
+            db.aluno.email,
+            ],
+            maxtextlength=30,
+    exportclasses=dict(tsv_with_hidden_cols=False,
+                       csv=False, xml=False, json=False))
+    return dict(grid=grid)
+
+# @auth.requires_login()
+def editar_aluno():
+    #db.aluno.cpf.readable = False
+    form = SQLFORM(Aluno, request.args(0, cast=str))
+    if form.process().accepted:
+        session.flash = 'Aluno atualizado: %s' % form.vars.nome
+        redirect(URL('ver_aluno'))
+    elif form.errors:
+        response.flash = 'Erros no formulário!'
+    else:
+        if not response.flash:
+            response.flash = 'Atualização de dados'
+    return dict(form=form)
+
+
+def aluno_detalhe():
+    '''
+    Aqui o request.arg (0) pega o parametro URL e executa o select no banco de
+    dados
+    '''
+    aluno_detalhe = db(aluno.cpf == request.args(0)).select()
+    return dict(fornecedor_details=fornecedor_details)
