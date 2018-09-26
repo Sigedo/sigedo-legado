@@ -1,0 +1,109 @@
+{{extend 'layout.html'}}
+
+{{# -*- coding: utf-8 -*-}}
+
+<!-- For para correr as colunas do select aplicado em default.py função aluno_detalhe(): -->
+{{for aluno in aluno_detalhe:}}
+	{{aluno}}
+{{pass}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+	<br>
+	<div class="container">
+		<h5 class="header col s12 light">Detalhes de {{=aluno.nome.title()}}</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">assignment_ind</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Nome</label><br>
+								{{=aluno.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s6">
+								<label>Nome fantasia</label><br>
+								{{=to_cpf(aluno.cpf)}}
+							</div>
+							<div class="col s6">
+								<label>Identidade</label><br>
+								{{=to_rg(aluno.identidade)}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Matricula</label><br>
+								{{=aluno.matricula}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s6">
+								<label>Data de nascimento</label><br>
+								{{=aluno.data_nascimento}}
+							</div>
+							<div class=" col s6">
+								<label>Estado Civil</label><br>
+								{{=aluno.civil}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s6">
+								<label>Curso</label><br>
+								{{=aluno.curso}}
+							</div>
+							<div class=" col s6">
+								<label>Periodo</label><br>
+								{{=aluno.periodo}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Endereço</label><br>
+								{{=aluno.endereco}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>E-mail</label><br>
+								{{=aluno.email}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12">
+								<label>telefone</label><br>
+								{{=to_telefone(aluno.telefone)}}
+							</div>
+						</div>
+
+						<br><br>
+						<div class="row">
+							<a class="btn waves-effect waves-light right" href="{{=URL('default', 'aluno_editar/' + aluno.cpf)}}">Editar
+								<i class="material-icons right">edit</i>
+							</a>
+							<a class="btn waves-effect waves-light left" href="{{=URL('default', 'aluno_ver')}}">Voltar
+								<i class="material-icons right">reply</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div> 	<!-- Fim do card -->
+			<br>
+		</div>
+	</div>
+	<br>
+</body>

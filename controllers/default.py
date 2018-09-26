@@ -5,11 +5,15 @@
 # -------------------------------------------------------------------------
 
 # ---- index page ----
+
 def index():
     return dict()
 
 # ---- index2 page ----
 def level():
+    return dict()
+
+def suporte():
     return dict()
 
 # ---- API (example) -----
@@ -62,28 +66,28 @@ def download():
 
 # ---- CRUD ALUNO -----
 
-def cadastro_aluno():
+def aluno_cadastro():
     form = SQLFORM(Aluno)
     if form.process().accepted:
         session.flash = 'Novo aluno: %s' % form.vars.nome
-        redirect(URL('cadastro_aluno'))
+        redirect(URL('aluno_cadastro'))
     elif form.errors:
-        response.flash = 'Erros encontrados no formulário'
+        response.flash = 'Corrija os erros encontrados no formulário'
     else:
         if not response.flash:
             response.flash = 'Preencha o formulário'
     return dict(form=form)
 
 
-def ver_aluno():
+def aluno_ver():
     if 'edit' in request.args:
         edit = request.args
         response.flash = edit
         parametro = edit[2]
-        url = 'editar_aluno/' + parametro
+        url = 'aluno_editar/' + parametro
         redirect(URL(url))
     if 'view' in request.args:
-        # db.fornecedor.id.readable = False # or writable
+        # db.table.id.readable or writable = False
         view = request.args
         response.flash = view
         parametro = view[2]
@@ -93,6 +97,7 @@ def ver_aluno():
     grid = SQLFORM.grid(Aluno, create=False, advanced_search = False,
     fields=[
             db.aluno.nome,
+            db.aluno.matricula,
             db.aluno.curso,
             db.aluno.periodo,
             db.aluno.email,
@@ -103,12 +108,13 @@ def ver_aluno():
     return dict(grid=grid)
 
 # @auth.requires_login()
-def editar_aluno():
-    #db.aluno.cpf.readable = False
-    form = SQLFORM(Aluno, request.args(0, cast=str))
+def aluno_editar():
+    # db.aluno.cpf.writable = False
+    # db.aluno.cpf.readable = True
+    form = SQLFORM(Aluno, request.args(0, cast=str),)
     if form.process().accepted:
         session.flash = 'Aluno atualizado: %s' % form.vars.nome
-        redirect(URL('ver_aluno'))
+        redirect(URL('aluno_detalhe/' + form.vars.cpf))
     elif form.errors:
         response.flash = 'Erros no formulário!'
     else:
@@ -122,5 +128,5 @@ def aluno_detalhe():
     Aqui o request.arg (0) pega o parametro URL e executa o select no banco de
     dados
     '''
-    aluno_detalhe = db(aluno.cpf == request.args(0)).select()
-    return dict(fornecedor_details=fornecedor_details)
+    aluno_detalhe = db(Aluno.cpf == request.args(0)).select()
+    return dict(aluno_detalhe=aluno_detalhe)

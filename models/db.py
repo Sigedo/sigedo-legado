@@ -163,6 +163,7 @@ if configuration.get('scheduler.enabled'):
 Aluno = db.define_table('aluno',
     Field('cpf', 'string', label='CPF'),
     Field('identidade', 'string', label='Identidade'),
+    Field('matricula', 'string', label='Matricula'),
     Field('nome', 'string', label='Nome'),
     Field('civil', 'string', label='Estado Civil'),
     Field('data_nascimento', 'date', label="Data Nascimento"),

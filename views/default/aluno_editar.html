@@ -1,0 +1,141 @@
+{{extend 'layout.html'}}
+{{# -*- coding: utf-8 -*-}}
+{{=form.custom.begin}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+
+{{aluno_detalhe = db(Aluno.cpf == request.args(0)).select()}}
+
+{{for aluno in aluno_detalhe:}}
+	{{aluno}}
+{{pass}}
+
+<!-- <div style="display:none">
+	<input class="form-control string" id="aluno_cpf" name="cpf" value="{{=aluno.cpf}}" type="text">
+</div> -->
+<br>
+<div class="container">
+	<h5 class="header col s12 light">Editar dados de {{=aluno.nome.title()}}</h5>
+</div>
+<br><br>
+<div class="col container">
+	<div class="container">
+		<div class="card-panel hoverable"><br>
+			<div class="row">
+				<div class="container">
+					<div class="center"><i class="large material-icons blue-text text-darken-4">assignment_ind</i><br><br>
+					</div>
+					<div class="row">
+						<div class="input-field col s12">
+							{{form.elements('#aluno_nome')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.nome}}
+							<label for="aluno_nome">Nome</label>
+						</div>
+					</div>
+
+<!-- Provavelmente o Web2py possui um bug que ao utilizar writable=False e readable=True,
+o Framework não realiza o UPDATE/DELETE porque o web2py perde a referencia do form pela
+(https://web2py-book.appspot.com/chapter/37/07/formularios-e-validadores-todo)
+e (https://groups.google.com/forum/#!topic/web2py/3KbY7Bz5iDU). Então eu mantive
+o form ocultado para que tudo continue funcionando.  -->
+
+					<div class="row">
+						<div class="input-field col s6">
+							<input disabled value="{{=to_cpf(aluno.cpf)}}" id="disabled" type="text" class="validate">
+							<label for="disabled">CPF</label>
+						</div>
+						<div style="display:none"class="input-field col s6">
+							{{form.elements('#aluno_cpf')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.cpf}}
+							<label for="aluno_cpf">CPF</label>
+						</div>
+						<div class="input-field col s6">
+							{{form.elements('#aluno_identidade')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.identidade}}
+							<label for="aluno_identidade">Identidade</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12">
+							{{form.elements('#aluno_matricula')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.matricula}}
+							<label for="aluno_matricula">Matricula</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s6">
+							{{form.elements('#aluno_data_nascimento')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.data_nascimento}}
+							<label for="aluno_data_nascimento">Data Nascimento</label>
+						</div>
+
+						<div class="input-field col s6">
+							{{form.elements('#aluno_civil')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.civil}}
+							<label for="aluno_civil">Estado Civil</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s6">
+							{{form.elements('#aluno_curso')[0]['_class'] = "validate" }}
+							{{=form.custom.widget.curso}}
+							<label for="aluno_curso">Curso</label>
+						</div>
+
+						<div class="input-field col s6">
+							{{form.elements('#aluno_periodo')[0]['_class'] = "validate" }}
+							{{form.elements('#aluno_periodo')[0]['_type'] = "number" }}
+							{{=form.custom.widget.periodo}}
+							<label for="aluno_periodo">Periodo</label>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12">
+							{{form.elements('#aluno_email')[0]['_class'] = "validate" }}
+							{{form.elements('#aluno_email')[0]['_type'] = "email" }}
+							<i class="material-icons prefix blue-text text-darken-4">email</i>
+							{{=form.custom.widget.email}}
+							<label for="aluno_email">E-mail</label>
+							<span class="helper-text" data-error="E-mail incorreto" data-success="E-mail valido"></span>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="input-field col s12">
+							{{form.elements('#aluno_telefone')[0]['_class'] = "validate" }}
+							<i class="material-icons prefix blue-text text-darken-4">phone</i>
+							{{=form.custom.widget.telefone}}
+							<label for="aluno_telefone">Telefone</label>
+						</div>
+					</div>
+					<br>
+					<div class="row">
+						<div class="input-field col s12">
+							{{form.elements('#aluno_endereco')[0]['_class'] = "materialize-textarea" }}
+							{{=form.custom.widget.endereco}}
+							<label for="aluno_endereco">Endereço</label>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+			<button class="btn waves-effect waves-light right" type="submit" name="action">Atualizar
+				<i class="material-icons right">check</i>
+			</button>
+		</div>
+		</div>
+		<br>
+	</div>
+</div>
+</div>
+</div>
+<br><br><br><br>
+
+</body>
+
+{{=form.custom.end}}
