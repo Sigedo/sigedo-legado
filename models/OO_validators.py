@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
-def advanced_editor(field, value):
-    return TEXTAREA(_id=str(field).replace('.', '_'),
-                    _name=field.name, _class='text ckeditor', value=value, _cols=80, _rows=10)
 
+## REPRESENTAÇÃO DE DADOS
+
+# converter em decimal
 
 def to_decimal(value):
     value = value.replace('R$', '')
@@ -11,6 +11,34 @@ def to_decimal(value):
     decimal = without_dot.replace(',', '.')
     return decimal
 
+# representar CNPJ
+def to_cnpj(value):
+    return "%s.%s.%s/%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:12], value[12:14] )
+
+# representar CPF
+def to_cpf(value):
+    return "%s.%s.%s-%s" % ( value[0:3], value[3:6], value[6:9], value[9:11])
+
+# representar CPF
+def to_cpf(value):
+    return "%s.%s.%s-%s" % ( value[0:3], value[3:6], value[6:9], value[9:11])
+
+# representar documento de identidade
+def to_rg(value):
+    return "%s.%s.%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:])
+
+# representação de telefone
+
+def to_telefone(value):
+    if value and len(value) == 11:
+        formatado = '(' +  value[0:2] + ')' + ' ' + value[2:7] + '-' + value[7:11]
+    else:
+        formatado = '(' +  value[0:2] + ')' + ' ' + value[2:6] + '-' + value[6:10]
+    return formatado
+
+
+
+## CLASSES VERIFICADORAS
 
 class IS_CPF_OR_CNPJ(object):
     def __init__(self, format=True, error_message='Digite apenas os números!'):
@@ -129,6 +157,69 @@ class IS_CPF_OR_CNPJ(object):
             formatado = value
         return formatado
 
+class IS_CPF(object):
+    def __init__(self, format=True, error_message='Digite apenas os números!'):
+        self.format = format
+        self.error_message = error_message
+
+    def __call__(self, value):
+
+        def valida(value):
+
+            def calcdv(numb):
+                result = int()
+                seq = reversed(((range(9, id_type[1], -1) * 2)[:len(numb)]))
+                #return (value,'to fundo1')
+                for digit, base in zip(numb, seq):
+                    result += int(digit) * int(base)
+
+                dv = result % 11
+                #return (value,'to fundo1'+str(dv))
+                return (dv - 10) and dv or 0
+
+            id_type = ['CPF', -1]
+
+            numb, xdv = value[:-2], value[-2:]
+
+            dv1 = calcdv(numb)
+            #return (value,'entrei'+str(dv1))
+            dv2 = calcdv(numb + str(dv1))
+            return (('%d%d' % (dv1, dv2) == xdv and True or False), id_type[0])
+        try:
+            cpf = str(value)
+            if len(cpf) >= 11:
+                #return (value, 'cpf acima de 11')
+                c = []
+                for d in cpf:
+                    if d.isdigit():
+                        c.append(d)
+                cl = str(''.join(c))
+                #return (value, 'cpf incorreto'+str(cl))
+                if len(cl) == 11:
+                    if valida(cl)[0] == True:
+                        return (cl, None)
+                    else:
+                        return (cl, 'CPF inválido')
+                elif len(cl) < 11:
+                    return (cl, 'CPF incompleto')
+                else:
+                    return (cl, 'CPF com mais de 11 dígitos')
+            else:
+                return (value, 'CPF deve estar no formato 000.000.000-00')
+                #return(cpf,'aquiok'+str(len(cpf)==11))
+
+        except:
+            return (value, 'algum erro' + str(value))
+
+    def formatter(self, value):
+        #if value ==11:
+        #formatado = value[0:3] + '.' + value[3:6] + '.' + value[6:9] + '-' + value[9:11]
+        #else:
+        formatado = value
+        #    formatado=value
+        #formatado = value
+        return formatado
+
 
 class IS_CNPJ(object):
     def __init__(self, format=True, error_message='Digite apenas os números!'):
@@ -170,21 +261,9 @@ class IS_CNPJ(object):
                 else:
                     return (value, 'CNPJ não é válido')
 
-
-
         except:
             return (value, 'algum erro' + str(value))
 
-
-
-def to_cnpj(value):
-    return "%s.%s.%s/%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:12], value[12:14] )
-
-def to_cpf(value):
-    return "%s.%s.%s-%s" % ( value[0:3], value[3:6], value[6:9], value[9:11])
-
-def to_rg(value):
-    return "%s.%s.%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:])
 
 class IS_CEP(object):
     def __init__(self, format=True, error_message='Digite apenas os números!'):
@@ -206,9 +285,6 @@ class IS_CEP(object):
                 return (str(cep), None)
             else:
                 return (value, 'Número de dígitos incorreto para CEP')
-
-
-
         except:
             return (value, 'algum erro' + str(value))
 
@@ -217,7 +293,7 @@ class IS_CEP(object):
         return formatado
 
 
-class IS_TELEFONE(object):
+class IS_PHONE(object):
     def __init__(self, format=True, error_message='Digite apenas os números!'):
         self.format = format
         self.error_message = error_message
@@ -251,83 +327,6 @@ class IS_TELEFONE(object):
             formatado = '(' +  value[0:2] + ')' + ' ' + value[2:7] + '-' + value[7:11]
         else:
             formatado = '(' +  value[0:2] + ')' + ' ' + value[2:6] + '-' + value[6:10]
-        return formatado
-
-
-def to_telefone(value):
-    if value and len(value) == 11:
-        formatado = '(' +  value[0:2] + ')' + ' ' + value[2:7] + '-' + value[7:11]
-    else:
-        formatado = '(' +  value[0:2] + ')' + ' ' + value[2:6] + '-' + value[6:10]
-    return formatado
-
-
-
-class IS_CPF(object):
-    def __init__(self, format=True, error_message='Digite apenas os números!'):
-        self.format = format
-        self.error_message = error_message
-
-    def __call__(self, value):
-
-        def valida(value):
-
-            def calcdv(numb):
-                result = int()
-                seq = reversed(((range(9, id_type[1], -1) * 2)[:len(numb)]))
-                #return (value,'to fundo1')
-                for digit, base in zip(numb, seq):
-                    result += int(digit) * int(base)
-
-                dv = result % 11
-                #return (value,'to fundo1'+str(dv))
-                return (dv - 10) and dv or 0
-
-            id_type = ['CPF', -1]
-
-            numb, xdv = value[:-2], value[-2:]
-
-            dv1 = calcdv(numb)
-            #return (value,'entrei'+str(dv1))
-            dv2 = calcdv(numb + str(dv1))
-            return (('%d%d' % (dv1, dv2) == xdv and True or False), id_type[0])
-
-
-        try:
-            cpf = str(value)
-            #return(cpf,'aquiok'+str(len(cpf)==11))
-            if len(cpf) >= 11:
-
-                #return (value, 'cpf acima de 11')
-                c = []
-                for d in cpf:
-                    if d.isdigit():
-                        c.append(d)
-                cl = str(''.join(c))
-                #return (value, 'cpf incorreto'+str(cl))
-                if len(cl) == 11:
-                    if valida(cl)[0] == True:
-                        return (cl, None)
-                    else:
-                        return (cl, 'cpf inválido')
-                elif len(cl) < 11:
-                    return (cl, 'cpf incompleto')
-                else:
-                    return (cl, 'cpf tem mais de 11 dígitos')
-            else:
-                return (value, 'cpf deve estar no formato 000.000.000-00')
-                #return(cpf,'aquiok'+str(len(cpf)==11))
-
-
-        except:
-            return (value, 'algum erro' + str(value))
-
-    def formatter(self, value):
-        #if value ==11:
-        formatado = value[0:3] + '.' + value[3:6] + '.' + value[6:9] + '-' + value[9:11]
-        #else:
-        #    formatado=value
-        #formatado = value
         return formatado
 
 class IS_MONEY(object):
@@ -366,6 +365,7 @@ class IS_MONEY(object):
                          ,error_message=self.error_message
                          ,dot=self.dot)(value)
 
+
 class IS_TAG(object):
     def __init__(self, format=True, error_message='Digite a tag do equipamento'):
         self.format = format
@@ -391,6 +391,7 @@ class IS_TAG(object):
             return (tag, None)
         except:
             return (tag, str(tag) + 'Não é uma tag valida' )
+
 
 class IS_STRING(object):
     """
@@ -505,8 +506,6 @@ def valor(value):
     else:
         reais = 0
     return '%s,%s' % (reais, centavos)
-
-#db.convenio.virtualfields.append(ConveniosVirtualFields())
 
 
 def lt(s):
