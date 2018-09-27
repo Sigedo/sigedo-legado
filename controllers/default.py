@@ -97,6 +97,7 @@ def aluno_ver():
     grid = SQLFORM.grid(Aluno, create=False, advanced_search = False,
     fields=[
             db.aluno.nome,
+            db.aluno.cpf,
             db.aluno.matricula,
             db.aluno.curso,
             db.aluno.periodo,
