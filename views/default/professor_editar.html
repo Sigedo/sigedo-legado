@@ -1,0 +1,97 @@
+{{extend 'layout.html'}}
+{{# -*- coding: utf-8 -*-}}
+{{=form.custom.begin}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+
+{{professor_detalhe = db(Professor.cpf == request.args(0)).select()}}
+
+{{for professor in professor_detalhe:}}
+	{{professor}}
+{{pass}}
+	<br>
+	<div class="container">
+		<h5 class="header col s12 light">Editar dados de {{=professor.nome.title()}}</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">school</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#professor_nome')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.nome}}
+								<label for="professor_nome">Nome</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								<input disabled value="{{=to_cpf(professor.cpf)}}" id="disabled" type="text" class="validate">
+								<label for="disabled">CPF</label>
+							</div>
+							<div style="display:none" class="input-field col s12">
+								{{form.elements('#professor_cpf')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.cpf}}
+								<label for="professor_cpf">CPF</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#professor_email')[0]['_class'] = "validate" }}
+								{{form.elements('#professor_email')[0]['_type'] = "email" }}
+								<i class="material-icons prefix blue-text text-darken-4">email</i>
+								{{=form.custom.widget.email}}
+								<label for="professor_email">E-mail</label>
+								<span class="helper-text" data-error="E-mail incorreto" data-success="E-mail valido"></span>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#professor_telefone')[0]['_class'] = "validate" }}
+								<i class="material-icons prefix blue-text text-darken-4">phone</i>
+								{{=form.custom.widget.telefone}}
+								<label for="professor_telefone">Telefone</label>
+							</div>
+						</div>
+						<br>
+
+					</div>
+					<div class="container">
+					<button class="btn waves-effect waves-light right" type="submit" name="action">Atualizar
+						<i class="material-icons right">check</i>
+					</button>
+					<div class="left">
+						<a class="btn waves-effect waves-light left" href="{{=URL('default', 'aluno_ver')}}">Voltar
+							<i class="material-icons right">reply</i>
+						</a>
+					</div>
+				</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+</div>
+<br><br><br><br>
+
+<script>
+
+	$(document).ready(function(){
+		$('select').formSelect();
+	});
+
+</script>
+
+</body>
+
+{{=form.custom.end}}

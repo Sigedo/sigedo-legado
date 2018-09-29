@@ -24,7 +24,7 @@
 		<div class="card-panel hoverable"><br>
 			<div class="row">
 				<div class="container">
-					<div class="center"><i class="large material-icons blue-text text-darken-4">assignment_ind</i><br><br>
+					<div class="center"><i class="large material-icons blue-text text-darken-4">assignment</i><br><br>
 					</div>
 					<div class="row">
 						<div class="input-field col s12">
@@ -45,7 +45,7 @@ o form ocultado para que tudo continue funcionando.  -->
 							<input disabled value="{{=to_cpf(aluno.cpf)}}" id="disabled" type="text" class="validate">
 							<label for="disabled">CPF</label>
 						</div>
-						<div style="display:none"class="input-field col s6">
+						<div style="display:none" class="input-field col s6">
 							{{form.elements('#aluno_cpf')[0]['_class'] = "validate" }}
 							{{=form.custom.widget.cpf}}
 							<label for="aluno_cpf">CPF</label>
@@ -141,6 +141,13 @@ o form ocultado para que tudo continue funcionando.  -->
 </div>
 </div>
 <br><br><br><br>
+<script>
+
+	$(document).ready(function(){
+		$('select').formSelect();
+	});
+
+</script>
 
 </body>
 

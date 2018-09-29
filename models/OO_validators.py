@@ -19,10 +19,6 @@ def to_cnpj(value):
 def to_cpf(value):
     return "%s.%s.%s-%s" % ( value[0:3], value[3:6], value[6:9], value[9:11])
 
-# representar CPF
-def to_cpf(value):
-    return "%s.%s.%s-%s" % ( value[0:3], value[3:6], value[6:9], value[9:11])
-
 # representar documento de identidade
 def to_rg(value):
     return "%s.%s.%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:])
@@ -205,8 +201,8 @@ class IS_CPF(object):
                 else:
                     return (cl, 'CPF com mais de 11 dígitos')
             else:
-                return (value, 'CPF deve estar no formato 000.000.000-00')
-                #return(cpf,'aquiok'+str(len(cpf)==11))
+                return (value, 'CPF inválido')
+
 
         except:
             return (value, 'algum erro' + str(value))
@@ -392,6 +388,14 @@ class IS_TAG(object):
         except:
             return (tag, str(tag) + 'Não é uma tag valida' )
 
+class IS_TITLE(object):
+    """
+        Converts to title case::
+    """
+
+    def __call__(self, value):
+        value = str(value).title()
+        return (value, None)
 
 class IS_STRING(object):
     """

@@ -1,0 +1,68 @@
+{{extend 'layout.html'}}
+
+{{# -*- coding: utf-8 -*-}}
+
+{{for professor in professor_detalhe:}}
+	{{professor}}
+{{pass}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+	<br>
+	<div class="container">
+		<h5 class="header col s12 light">Detalhes de {{=professor.nome.title()}}</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">school</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Nome</label><br>
+								{{=professor.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>CPF</label><br>
+								{{=to_cpf(professor.cpf)}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>E-mail</label><br>
+								{{=professor.email}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12">
+								<label>telefone</label><br>
+								{{=to_telefone(professor.telefone)}}
+							</div>
+						</div>
+
+						<br><br>
+						<div class="row">
+							<a class="btn waves-effect waves-light right" href="{{=URL('default', 'professor_editar/' + professor.cpf)}}">Editar
+								<i class="material-icons right">edit</i>
+							</a>
+							<a class="btn waves-effect waves-light left" href="{{=URL('default', 'professor_ver')}}">Voltar
+								<i class="material-icons right">reply</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div> 	<!-- Fim do card -->
+			<br>
+		</div>
+	</div>
+	<br>
+</body>

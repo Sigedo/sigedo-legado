@@ -97,8 +97,7 @@ auth = Auth(db, host_names=configuration.get('host.names'))
 auth.settings.extra_fields['auth_user'] = []
 auth.define_tables(username=False, signature=False)
 
-# configuração de redirecionamento para a pagina de configuração
-auth.settings.login_next = URL('default','level')
+
 
 # -------------------------------------------------------------------------
 # configure email
@@ -115,8 +114,19 @@ mail.settings.ssl = configuration.get('smtp.ssl') or False
 # -------------------------------------------------------------------------
 auth.settings.registration_requires_verification = False
 auth.settings.registration_requires_approval = False
-auth.settings.reset_password_requires_verification = True
+auth.settings.reset_password_requires_verification = False
 
+# configuração de redirecionamento para a pagina de configuração
+# auth.settings.login_next = URL('index')
+# auth.settings.logout_next = URL('index')
+# auth.settings.profile_next = URL('index')
+# auth.settings.register_next = URL('user', args='login')
+# auth.settings.retrieve_username_next = URL('index')
+# auth.settings.retrieve_password_next = URL('index')
+# auth.settings.change_password_next = URL('index')
+# auth.settings.request_reset_password_next = URL('user', args='login')
+# auth.settings.reset_password_next = URL('user', args='login')
+# auth.settings.verify_email_next = URL('user', args='login')
 # -------------------------------------------------------------------------
 # read more at http://dev.w3.org/html5/markup/meta.name.html
 # -------------------------------------------------------------------------
@@ -161,7 +171,7 @@ if configuration.get('scheduler.enabled'):
 # auth.enable_record_versioning(db)
 
 Aluno = db.define_table('aluno',
-    Field('cpf', 'string', label='CPF'),
+    Field('cpf', 'string', label='CPF', length=11, ondelete='SET NULL'),
     Field('identidade', 'string', label='Identidade'),
     Field('matricula', 'string', label='Matricula'),
     Field('nome', 'string', label='Nome'),
@@ -169,10 +179,32 @@ Aluno = db.define_table('aluno',
     Field('data_nascimento', 'date', label="Data Nascimento"),
     Field('curso', 'string', label='Curso'),
     Field('periodo', 'integer', label='Periodo'),
-    Field('endereco', 'text', label='Endereço'),
+    Field('endereco', 'text' ,label='Endereço'),
     Field('email', 'string', label="E-Mail"),
     Field('telefone', 'string', label="Telefone"),
     auth.signature,
     format = "%(nome)s",
     primarykey=['cpf']
+    )
+
+Professor = db.define_table('professor',
+    Field('cpf', 'string', label='CPF', length=11, ondelete='SET NULL'),
+    Field('nome', 'string', label='Nome'),
+    Field('email', 'string', label="E-Mail"),
+    Field('telefone', 'string', label="Telefone"),
+    auth.signature,
+    format = "%(nome)s",
+    primarykey=['cpf']
+    )
+
+Empresa = db.define_table('empresa',
+    Field('cnpj', 'string', label='CNPJ', lengt=14, ondelete='SET NULL'),
+    Field('razao', 'string', label='Nome'),
+    Field('nome', 'string', label='Nome'),
+    Field('email', 'string', label="E-Mail"),
+    Field('telefone', 'string', label="Telefone"),
+    Field('endereco', 'text' ,label='Endereço'),
+    auth.signature,
+    format = "%(nome)s",
+    primarykey=['cnpj']
     )

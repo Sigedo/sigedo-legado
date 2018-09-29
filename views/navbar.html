@@ -22,19 +22,46 @@
   <li><a href="{{=URL('default','suporte')}}">Relatórios</a></li>
 </ul>
 
+<!-- Dropdown Estágio Structure -->
+<ul id="dropdown-aluno" class="dropdown-content">
+  <li><a href="{{=URL('default','estagio_cadastro')}}">Cadastrar estágio</a></li>
+  <li><a href="{{=URL('default','estagio_ver')}}">Visualizar estágios</a></li>
+  <li class="divider"></li>
+  <li><a href="{{=URL('default','suporte')}}">Relatórios</a></li>
+</ul>
+
+<!-- Dropdown Professor Structure -->
+<ul id="dropdown-aluno" class="dropdown-content">
+  <li><a href="{{=URL('default','professor_cadastro')}}">Cadastrar professor</a></li>
+  <li><a href="{{=URL('default','professor_ver')}}">Visualizar professores</a></li>
+</ul>
+
+<!-- Dropdown Empresa Structure -->
+<ul id="dropdown-aluno" class="dropdown-content">
+  <li><a href="{{=URL('default','empresa_cadastro')}}">Cadastrar empresa</a></li>
+  <li><a href="{{=URL('default','empresa_ver')}}">Visualizar empresa</a></li>
+  <li class="divider"></li>
+  <li><a href="{{=URL('default','suporte')}}">Relatório de convênio</a></li>
+</ul>
+
+
 <nav class="blue darken-4" role="navigation">
   <div class="nav-wrapper container">
+
     <a id="logo-container" href="{{=URL('default','level')}}" class="brand-logo">SIGEDO</a>
     <ul class="right hide-on-med-and-down">
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Aluno<i class="material-icons right">arrow_drop_down</i></a></li>
-      <li><a href="#">Navbar Link</a></li>
-      <li><a href="#">Navbar Link</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Aluno</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Estágio</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Professor</a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Empresa</a></li>
+      <li><a href="#"></a></li>
+      <li><a href="#">Relatórios</a></li>
       <!-- Dropdown Trigger -->
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown-login">{{if auth.user:}}{{=auth.user.first_name}}{{else:}}Login{{pass}}<i class="material-icons right">arrow_drop_down</i></a></li>
     </ul>
 
     <ul id="nav-mobile" class="sidenav">
-      <li><a href="#">Navbar Link</a></li>
+      <li><a href="#">Ainda não funciona mobile</a></li>
     </ul>
     <a href="#" data-target="nav-mobile" class="sidenav-trigger"><i class="material-icons">menu</i></a>
   </div>
