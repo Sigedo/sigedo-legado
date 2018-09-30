@@ -100,7 +100,7 @@ def aluno_ver():
         url = 'aluno_detalhe/' + str(parametro)
         redirect(URL(url))
 
-    grid = SQLFORM.grid(Aluno, create=False, advanced_search = False,
+    grid = SQLFORM.grid(Aluno, create=False, advanced_search = False, orderby=db.aluno.nome,
     fields=[
             db.aluno.nome,
             db.aluno.cpf,
@@ -128,6 +128,11 @@ def aluno_editar():
         if not response.flash:
             response.flash = 'Atualização de dados'
     return dict(form=form)
+
+def aluno_apagar():
+    db(Aluno.cpf==request.args(0, cast=str)).delete()
+    session.flash = 'Aluno apagado!'
+    redirect(URL('aluno_ver'))
 
 
 def aluno_detalhe():
@@ -168,7 +173,7 @@ def professor_ver():
         url = 'professor_detalhe/' + str(parametro)
         redirect(URL(url))
 
-    grid = SQLFORM.grid(Professor, create=False, advanced_search = False,
+    grid = SQLFORM.grid(Professor, create=False, advanced_search = False, orderby=db.professor.nome,
     fields=[
             db.professor.nome,
             db.professor.cpf,
@@ -194,6 +199,10 @@ def professor_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+def professor_apagar():
+    db(Professor.cpf==request.args(0, cast=str)).delete()
+    session.flash = 'Professor apagado!'
+    redirect(URL('professor_ver'))
 
 def professor_detalhe():
     professor_detalhe = db(Professor.cpf == request.args(0)).select()
@@ -255,6 +264,10 @@ def empresa_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+def empresa_apagar():
+    db(Empresa.cnpj==request.args(0, cast=str)).delete()
+    session.flash = 'Empresa apagada!'
+    redirect(URL('empresa_ver'))
 
 def empresa_detalhe():
     empresa_detalhe = db(Empresa.cnpj == request.args(0)).select()
