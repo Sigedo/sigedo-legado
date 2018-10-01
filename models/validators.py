@@ -18,11 +18,10 @@ Aluno.civil.requires = IS_IN_SET([
     "Solteiro(a)",
     "Casado(a)",
     "Viúvo(a)"],error_message="Estado civil")
-
 # ----- Representação de aluno -----
-
 Aluno.cpf.represent = lambda value, row: MASK_CPF()(value)
-Aluno.matricula.represent = lambda value, row: to_telefone(value)
+#Aluno.matricula.represent = lambda value, row: to_telefone(value)
+
 
 # ----- Validador de professor -----
 Professor.nome.requires = [IS_TITLE()]
@@ -31,6 +30,8 @@ IS_NOT_IN_DB(db, 'professor.cpf', error_message="CPF já cadastrado"),
 IS_NOT_EMPTY(error_message='Informe o CPF')]
 Professor.telefone.requires = IS_PHONE(error_message="Telefone inválido")
 Professor.email.requires = IS_EMAIL(error_message="E-mail inválido")
+
+
 # ----- Validador de empresa -----
 Empresa.nome.requires = [IS_TITLE()]
 Empresa.razao.requires = [IS_TITLE()]
@@ -39,3 +40,6 @@ IS_NOT_IN_DB(db, 'empresa.cnpj', error_message="CNPJ já cadastrado"),
 IS_NOT_EMPTY(error_message='Informe o CNPJ')]
 Empresa.telefone.requires = IS_PHONE(error_message="Telefone inválido")
 Empresa.email.requires = IS_EMAIL(error_message="E-mail inválido")
+# ----- Representação de aluno -----
+Empresa.cnpj.represent = lambda value, row: MASK_CNPJ()(value)
+Empresa.telefone.represent = lambda value, row: to_telefone(value)
