@@ -3,9 +3,18 @@
 {{=form.custom.begin}}
 
 <body class="grey lighten-3">
-	{{include 'navbar.html'}}<br>
+	{{include 'navbar.html'}}
+
+	{{empresa_detalhe = db(Empresa.cnpj == request.args(0)).select()}}
+
+	{{for empresa in empresa_detalhe:}}
+		{{empresa}}
+	{{pass}}
+
+
+	<br>
 	<div class="container">
-		<h5 class="header col s12 light">Cadastro de empresa</h5>
+		<h5 class="header col s12 light">Editar dados de {{=empresa.nome.title()}}</h5>
 	</div>
 	<br><br>
 	<div class="col container">
@@ -34,6 +43,10 @@
 
 						<div class="row">
 							<div class="input-field col s12">
+								<input disabled value="{{=to_cnpj(empresa.cnpj)}}" id="disabled" type="text" class="validate">
+								<label for="disabled">CNPJ</label>
+							</div>
+							<div style="display:none"class="input-field col s12">
 								{{form.elements('#empresa_cnpj')[0]['_class'] = "validate" }}
 								{{=form.custom.widget.cnpj}}
 								<label for="empresa_cnpj">CNPJ</label>
@@ -76,9 +89,21 @@
 						<br>
 					</div>
 					<div class="container">
-					<button class="btn waves-effect waves-light right" type="submit" name="action">Cadastrar
-						<i class="material-icons right">add</i>
+					<button class="btn waves-effect waves-light right" type="submit" name="action">Atualizar
+						<i class="material-icons right">check</i>
 					</button>
+					<div class="left">
+						<a class="btn waves-effect waves-light left" href="{{=URL('default', 'empresa_ver')}}">Voltar
+							<i class="material-icons right">reply</i>
+						</a>
+					</div>
+
+					<div class="center">
+						<a class="btn waves-effect waves-light center red" href="{{=URL('default', 'empresa_apagar/' + request.args(0))}}">Deletar
+							<i class="material-icons right">delete</i>
+						</a>
+					</div>
+
 				</div>
 				</div>
 			</div>

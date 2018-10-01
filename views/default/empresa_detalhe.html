@@ -1,0 +1,87 @@
+{{extend 'layout.html'}}
+
+{{# -*- coding: utf-8 -*-}}
+
+{{for empresa in empresa_detalhe:}}
+	{{empresa}}
+{{pass}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+	<br>
+	<div class="container">
+		<h5 class="header col s12 light">Detalhes de {{=empresa.nome.title()}}</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">business</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Nome Fantasia</label><br>
+								{{=empresa.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Razão social</label><br>
+								{{=empresa.razao}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>CNPJ</label><br>
+								{{=empresa.cnpj}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s6">
+								<label>Telefone</label><br>
+								{{=to_telefone(empresa.telefone)}}
+							</div>
+							<div class="col s6">
+								<label>E-mail</label><br>
+								{{=empresa.email}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Endereco</label><br>
+								{{=empresa.endereco}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>termo de convênio</label><br>
+								<a class="" href="{{=URL('default/download', empresa.termo)}}">Baixar documento
+								</a>
+							</div>
+						</div>
+
+						<br><br>
+						<div class="row">
+							<a class="btn waves-effect waves-light right" href="{{=URL('default', 'empresa_editar/' + empresa.cnpj)}}">Editar
+								<i class="material-icons right">edit</i>
+							</a>
+							<a class="btn waves-effect waves-light left" href="{{=URL('default', 'empresa_ver')}}">Voltar
+								<i class="material-icons right">reply</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div> 	<!-- Fim do card -->
+			<br>
+		</div>
+	</div>
+	<br>
+</body>

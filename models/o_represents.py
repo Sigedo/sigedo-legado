@@ -8,6 +8,7 @@
 
 import re
 
+#decimal
 def to_decimal(value):
     value = value.replace('R$', '')
     without_dot = value.replace('.', '')
@@ -24,16 +25,25 @@ def to_cpf(value):
 
 # representar documento de identidade
 def to_rg(value):
+    value = value.replace('.','')
+    value = value.replace('-','')
+    value = value.replace(',','')
     return "%s.%s.%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:])
 
 # representação de telefone
-
 def to_telefone(value):
     if value and len(value) == 11:
         formatado = '(' +  value[0:2] + ')' + ' ' + value[2:7] + '-' + value[7:11]
     else:
         formatado = '(' +  value[0:2] + ')' + ' ' + value[2:6] + '-' + value[6:10]
     return formatado
+
+# representar data pt-BR
+def to_data(value):
+    dia = str(value.day)
+    mes = str(value.month)
+    ano = str(value.year)
+    return dia + "/" + mes + "/" + ano
 
 
 UNMASK = lambda num: re.sub('([^\d]+)', '', num or '')
