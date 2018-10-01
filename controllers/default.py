@@ -69,7 +69,6 @@ def download():
     return response.download(request, db)
 
 
-
 # ---- CRUD ALUNO -----
 
 def aluno_cadastro():
