@@ -1,6 +1,9 @@
+Linux:
+
 sudo apt install python-pip
 pip install pymsql
 pip install pydal
 
 sudo apt install npm
 npm install material-design-icons --save
+
