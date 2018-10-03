@@ -5,7 +5,7 @@
 <body class="grey lighten-3">
 	{{include 'navbar.html'}}
 
-{{professor_detalhe = db(Professor.cpf == request.args(0)).select()}}
+{{professor_detalhe = db(Professor.id == request.args(0)).select()}}
 
 {{for professor in professor_detalhe:}}
 	{{professor}}
@@ -70,7 +70,7 @@
 						<i class="material-icons right">check</i>
 					</button>
 					<div class="left">
-						<a class="btn waves-effect waves-light left" href="{{=URL('default', 'aluno_ver')}}">Voltar
+						<a class="btn waves-effect waves-light left" href="{{=URL('default', 'professor_ver')}}">Voltar
 							<i class="material-icons right">reply</i>
 						</a>
 					</div>

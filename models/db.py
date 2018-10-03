@@ -171,12 +171,12 @@ if configuration.get('scheduler.enabled'):
 # auth.enable_record_versioning(db)
 
 Aluno = db.define_table('aluno',
-    Field('cpf', 'string', label='CPF', length=11, ondelete='SET NULL'),
+    Field('cpf', 'string', label='CPF', length=11),
     Field('identidade', 'string', label='Identidade'),
     Field('matricula', 'string', label='Matricula'),
     Field('nome', 'string', label='Nome'),
     Field('civil', 'string', label='Estado Civil'),
-    Field('data_nascimento', 'date', format=('%d-%m-%Y'), label="Data Nascimento"),
+    Field('data_nascimento', 'date', label="Data Nascimento"),
     Field('curso', 'string', label='Curso'),
     Field('periodo', 'integer', label='Periodo'),
     Field('endereco', 'text' ,label='Endereço'),
@@ -184,21 +184,21 @@ Aluno = db.define_table('aluno',
     Field('telefone', 'string', label="Telefone"),
     auth.signature,
     format = "%(nome)s",
-    primarykey=['cpf']
+    # primarykey=['cpf']
     )
 
 Professor = db.define_table('professor',
-    Field('cpf', 'string', label='CPF', length=11, ondelete='SET NULL'),
+    Field('cpf', 'string', label='CPF', length=11),
     Field('nome', 'string', label='Nome'),
     Field('email', 'string', label="E-Mail"),
     Field('telefone', 'string', label="Telefone"),
     auth.signature,
     format = "%(nome)s",
-    primarykey=['cpf']
+    # primarykey=['cpf']
     )
 
 Empresa = db.define_table('empresa',
-    Field('cnpj', 'string', label='CNPJ', lengt=14, ondelete='SET NULL'),
+    Field('cnpj', 'string', label='CNPJ', length=14),
     Field('razao', 'string', label='Nome'),
     Field('nome', 'string', label='Nome'),
     Field('email', 'string', label="E-Mail"),
@@ -207,5 +207,17 @@ Empresa = db.define_table('empresa',
     Field('termo', 'upload', label='Termo de convênio'),
     auth.signature,
     format = "%(nome)s",
-    primarykey=['cnpj']
+    # primarykey=['cnpj']
     )
+
+Estagio = db.define_table('estagio',
+    Field('aluno', 'reference aluno', label="Aluno", ondelete='SET NULL'),
+    Field('empresa', 'reference empresa', label="Empresa", ondelete='SET NULL'),
+    Field('professor', 'reference professor', label="Professor", ondelete='SET NULL'),
+    Field('supervisor', 'string', label="Supervisor"),
+    Field('data_inicio', 'date', label="Data início"),
+    Field('data_fim', 'date', label="Data início"),
+    Field('observacao', 'text', label="Observação"),
+    Field('situacao', 'string', label="Situação"),
+    auth.signature
+)

@@ -1,0 +1,92 @@
+{{extend 'layout.html'}}
+
+{{# -*- coding: utf-8 -*-}}
+
+{{for estagio in estagio_detalhe:}}
+	{{estagio}}
+{{pass}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}
+	<br>
+	<div class="container">
+		<h5 class="header col s12 light">Detalhes do estagio</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">school</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Aluno</label><br>
+								{{=estagio.aluno.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Empresa</label><br>
+								{{=estagio.empresa.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class=" col s12">
+								<label>Professor orientador</label><br>
+								{{=estagio.professor.nome}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12">
+								<label>Supervisor responsável</label><br>
+								{{=estagio.supervisor}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s6">
+								<label>Data de início</label><br>
+								{{=to_data(estagio.data_inicio)}}
+							</div>
+							<div class="col s6">
+								<label>Data fim</label><br>
+								{{=to_data(estagio.data_fim)}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12">
+								<label>Situação</label><br>
+								{{=estagio.situacao}}
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="col s12">
+								<label>Situação</label><br>
+								{{=estagio.observacao}}
+							</div>
+						</div>
+						<br><br>
+						<div class="row">
+							<a class="btn waves-effect waves-light right" href="{{=URL('default', 'estagio_editar/' + str(estagio.id))}}">Editar
+								<i class="material-icons right">edit</i>
+							</a>
+							<a class="btn waves-effect waves-light left" href="{{=URL('default', 'estagio_ver')}}">Voltar
+								<i class="material-icons right">reply</i>
+							</a>
+						</div>
+					</div>
+				</div>
+			</div> 	<!-- Fim do card -->
+			<br>
+		</div>
+	</div>
+	<br>
+</body>

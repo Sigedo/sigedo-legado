@@ -1,0 +1,108 @@
+{{extend 'layout.html'}}
+{{# -*- coding: utf-8 -*-}}
+{{=form.custom.begin}}
+
+<body class="grey lighten-3">
+	{{include 'navbar.html'}}<br>
+	<div class="container">
+		<h5 class="header col s12 light">Cadastro de Estágio</h5>
+	</div>
+	<br><br>
+	<div class="col container">
+		<div class="container">
+			<div class="card-panel hoverable"><br>
+				<div class="row">
+					<div class="container">
+						<div class="center"><i class="large material-icons blue-text text-darken-4">group_add</i><br><br>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_aluno')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.aluno}}
+								<label for="estagio_aluno">Aluno</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_professor')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.professor}}
+								<label for="estagio_professor">Professor orientador</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_empresa')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.empresa}}
+								<label for="estagio_empresa">Empresa</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_supervisor')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.supervisor}}
+								<label for="estagio_supervisor">Supervisor do estágio</label>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="input-field col s6">
+								{{form.elements('#estagio_data_inicio')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.data_inicio}}
+								<label for="estagio_data_inicio">Data inicial</label>
+							</div>
+
+							<div class="input-field col s6">
+								{{form.elements('#estagio_data_fim')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.data_fim}}
+								<label for="estagio_data_fim">Data final</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_situacao')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.situacao}}
+								<label for="estagio_situacao">Situação</label>
+							</div>
+						</div>
+
+
+						<div class="row">
+							<div class="input-field col s12">
+								{{form.elements('#estagio_observacao')[0]['_class'] = "materialize-textarea" }}
+								{{=form.custom.widget.observacao}}
+								<label for="estagio_observacao">Observação</label>
+							</div>
+						</div>
+						<br>
+					</div>
+					<div class="container">
+					<button class="btn waves-effect waves-light right" type="submit" name="action">Cadastrar
+						<i class="material-icons right">add</i>
+					</button>
+				</div>
+				</div>
+			</div>
+			<br>
+		</div>
+	</div>
+</div>
+</div>
+<br><br><br><br>
+
+<script>
+
+	$(document).ready(function(){
+		$('select').formSelect();
+	});
+
+</script>
+
+</body>
+
+{{=form.custom.end}}

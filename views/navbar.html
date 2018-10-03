@@ -54,10 +54,10 @@
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Estágio</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Professor</a></li>
       <li><a class="dropdown-trigger" href="#!" data-target="dropdown-aluno">Empresa</a></li>
-      <li><a href="#"></a></li>
-      <li><a href="#">Relatórios</a></li>
+      <li><a href="{{=URL('default','suporte')}}">Documentos</a></li>
+      <li><a href="{{=URL('default','suporte')}}">Relatórios</a></li>
       <!-- Dropdown Trigger -->
-      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-login">{{if auth.user:}}{{=auth.user.first_name}}{{else:}}Login{{pass}}<i class="material-icons right">arrow_drop_down</i></a></li>
+      <li><a class="dropdown-trigger" href="#!" data-target="dropdown-login">{{if auth.user:}}{{=auth.user.first_name}}{{else:}}Login{{pass}}<i class="material-icons right"><!--arrow_drop_down--></i></a></li>
     </ul>
 
     <ul id="nav-mobile" class="sidenav">

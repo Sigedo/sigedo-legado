@@ -5,6 +5,14 @@
 
 ## CLASSES VERIFICADORAS
 
+class IS_CNPJ_REFERENCE(object):
+    """
+        add 0 case::
+    """
+    def __call__(self, value):
+        value = str(value)
+        return (value, None)
+
 class IS_CPF_OR_CNPJ(object):
     def __init__(self, format=True, error_message='Digite apenas os números!'):
         self.format = format

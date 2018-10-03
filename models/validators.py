@@ -43,3 +43,17 @@ Empresa.email.requires = IS_EMAIL(error_message="E-mail inválido")
 # ----- Representação de aluno -----
 Empresa.cnpj.represent = lambda value, row: MASK_CNPJ()(value)
 Empresa.telefone.represent = lambda value, row: to_telefone(value)
+
+
+# ----- Validador de estágio -----
+Estagio.data_inicio.requires = IS_DATE(format=T('%d/%m/%Y'), error_message='Data no formato dd/mm/aaaa')
+Estagio.data_fim.requires = IS_DATE(format=T('%d/%m/%Y'), error_message='Data no formato dd/mm/aaaa')
+Estagio.situacao.requires = IS_IN_SET([
+    "Matriculado",
+    "Aprovado",
+    "Cancelado",
+    "Reprovado"], error_message="Selecione um estado")
+
+# Estagio.aluno.requires = IS_IN_DB(db, db.aluno.cpf, '%(nome)s')
+# Estagio.professor.requires = IS_IN_DB(db, db.professor.cpf, '%(nome)s')
+# Estagio.empresa.requires = IS_IN_DB(db, db.empresa.cnpj, '%(nome)s')

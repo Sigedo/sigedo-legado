@@ -15,6 +15,10 @@ def to_decimal(value):
     decimal = without_dot.replace(',', '.')
     return decimal
 
+def to_string(value):
+    value = str(value)
+    return value
+
 # representar CNPJ
 def to_cnpj(value):
     return "%s.%s.%s/%s-%s" % ( value[0:2], value[2:5], value[5:8], value[8:12], value[12:14] )

@@ -3,6 +3,7 @@
 {{include 'navbar.html'}}
 
 <body class="grey lighten-3">
+	<link rel="stylesheet" href="{{=URL('static','css/web2py-bootstrap4.css')}}"/>
 	<div class="container">
 		<br>
 		<h5 class="header col s12 light">Visualizar e encontrar empresas</h5>
@@ -12,7 +13,7 @@
 	<div class="col s1"></div>
 	<div class="col s10">
 	<div class="card-panel"><br>
-		{{include 'default/grid.html'}}
+		{{=grid}}
 		<br>
 	</div>
 </div>
