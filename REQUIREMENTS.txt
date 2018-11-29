@@ -1,9 +1,12 @@
 Linux:
 
-sudo apt install python-pip
-pip install pymsql
-pip install pydal
+* Recomendo usar metodo de criptografia legada no mysql * 
 
+sudo apt install python-pip
+sudo pip install pymysql
+sudo pip install pydal
+
+- Aplicação 
 sudo apt install npm
 npm install material-design-icons --save
 
