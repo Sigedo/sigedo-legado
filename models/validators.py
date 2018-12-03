@@ -54,6 +54,11 @@ Estagio.situacao.requires = IS_IN_SET([
     "Cancelado",
     "Reprovado"], error_message="Selecione um estado")
 
+Estagio.tipo.requires = IS_IN_SET([
+    "Obrigatório - Estágio 1",
+    "Obrigatório - Estágio 2",
+    "Não Obrigatório"], error_message="Selecione uma tipo de estágio")
+
 # Estagio.aluno.requires = IS_IN_DB(db, db.aluno.cpf, '%(nome)s')
 # Estagio.professor.requires = IS_IN_DB(db, db.professor.cpf, '%(nome)s')
 # Estagio.empresa.requires = IS_IN_DB(db, db.empresa.cnpj, '%(nome)s')

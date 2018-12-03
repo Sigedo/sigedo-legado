@@ -2,6 +2,8 @@
 {{# -*- coding: utf-8 -*-}}
 {{=form.custom.begin}}
 
+<meta http-equiv="Content-Language" content="pt-br">
+
 <body class="grey lighten-3">
 	{{include 'navbar.html'}}<br>
 	<div class="container">
@@ -42,12 +44,33 @@
 
 						<div class="row">
 							<div class="input-field col s12">
+								{{form.elements('#estagio_tipo')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.tipo}}
+								<label for="estagio_tipo">Tipo de estágio</label>
+							</div>
+						</div>
+
+						<div class="row">
+							<div class="input-field col s12">
 								{{form.elements('#estagio_supervisor')[0]['_class'] = "validate" }}
 								{{=form.custom.widget.supervisor}}
 								<label for="estagio_supervisor">Supervisor do estágio</label>
 							</div>
 						</div>
 
+						<div class="row">
+							<div class="input-field col s6">
+								{{form.elements('#estagio_semestre')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.semestre}}
+								<label for="estagio_semestre">Semestre</label>
+							</div>
+
+							<div class="input-field col s6">
+								{{form.elements('#estagio_ano')[0]['_class'] = "validate" }}
+								{{=form.custom.widget.ano}}
+								<label for="estagio_ano">Ano</label>
+							</div>
+						</div>
 
 						<div class="row">
 							<div class="input-field col s6">

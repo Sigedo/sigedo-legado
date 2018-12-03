@@ -216,8 +216,11 @@ Estagio = db.define_table('estagio',
     Field('professor', 'reference professor', label="Professor", ondelete='SET NULL'),
     Field('supervisor', 'string', label="Supervisor"),
     Field('data_inicio', 'date', label="Data início"),
-    Field('data_fim', 'date', label="Data início"),
-    Field('observacao', 'text', label="Observação"),
+    Field('data_fim', 'date', label="Data fim"),
+    Field('tipo', 'string', label="Tipo de estágio"),
+    Field('semestre', 'string', label="Semestre"),
+    Field('ano', 'string', label="Ano vigente"),
     Field('situacao', 'string', label="Situação"),
+    Field('observacao', 'text', label="Observação"),
     auth.signature
 )
