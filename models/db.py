@@ -86,7 +86,7 @@ response.form_label_separator = ''
 # -------------------------------------------------------------------------
 
 # Conexão MYSQL
-db = DAL('mysql://root:toor@127.0.0.1/sigedo')
+# db = DAL('mysql://root:toor@127.0.0.1/sigedo')
 
 # host names must be a list of allowed host names (glob syntax allowed)
 auth = Auth(db, host_names=configuration.get('host.names'))
@@ -117,16 +117,17 @@ auth.settings.registration_requires_approval = False
 auth.settings.reset_password_requires_verification = False
 
 # configuração de redirecionamento para a pagina de configuração
-# auth.settings.login_next = URL('index')
-# auth.settings.logout_next = URL('index')
-# auth.settings.profile_next = URL('index')
-# auth.settings.register_next = URL('user', args='login')
-# auth.settings.retrieve_username_next = URL('index')
-# auth.settings.retrieve_password_next = URL('index')
-# auth.settings.change_password_next = URL('index')
-# auth.settings.request_reset_password_next = URL('user', args='login')
-# auth.settings.reset_password_next = URL('user', args='login')
-# auth.settings.verify_email_next = URL('user', args='login')
+
+auth.settings.login_next = URL('level')
+auth.settings.logout_next = URL('index')
+auth.settings.profile_next = URL('index')
+auth.settings.register_next = URL('user', args='login')
+auth.settings.retrieve_username_next = URL('index')
+auth.settings.retrieve_password_next = URL('index')
+auth.settings.change_password_next = URL('index')
+auth.settings.request_reset_password_next = URL('user', args='login')
+auth.settings.reset_password_next = URL('user', args='login')
+auth.settings.verify_email_next = URL('user', args='login')
 # -------------------------------------------------------------------------
 # read more at http://dev.w3.org/html5/markup/meta.name.html
 # -------------------------------------------------------------------------
