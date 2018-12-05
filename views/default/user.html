@@ -2,7 +2,7 @@
 
 
 <body class="grey lighten-3">
-{{include "navbar.html"}}
+{{include "navlogin.html"}}
   <div class="container">
     <h4>
       {{=T('register') if request.args(0) == 'register' else T('login') if request.args(0) == 'login' else T(request.args(0).replace('_',' ').title())}}
