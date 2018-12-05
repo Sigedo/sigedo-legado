@@ -4,12 +4,16 @@
 # this file is released under public domain and you can use without limitations
 # -------------------------------------------------------------------------
 
+
+
+
 # ---- index page ----
 
 def index():
     return dict()
 
 # ---- index2 page ----
+@auth.requires_login()
 def level():
     return dict()
 
@@ -55,9 +59,9 @@ def user():
     """
     return dict(form=auth())
 
-def ver_usuarios():
-    grid = SQLFORM.grid(db.auth_user)
-    return dict(grid=grid)
+# def ver_usuarios():
+#     grid = SQLFORM.grid(db.auth_user)
+#     return dict(grid=grid)
 
 # ---- action to server uploaded static content (required) ---
 @cache.action()
@@ -71,6 +75,7 @@ def download():
 
 # ---- CRUD ALUNO -----
 
+@auth.requires_login()
 def aluno_cadastro():
     form = SQLFORM(Aluno)
     if form.process().accepted:
@@ -83,7 +88,7 @@ def aluno_cadastro():
             response.flash = 'Preencha o formulário'
     return dict(form=form)
 
-
+@auth.requires_login()
 def aluno_ver():
     if 'edit' in request.args:
         edit = request.args
@@ -113,7 +118,7 @@ def aluno_ver():
                        csv=False, xml=False, json=False))
     return dict(grid=grid)
 
-# @auth.requires_login()
+@auth.requires_login()
 def aluno_editar():
     # db.aluno.cpf.writable = False
     # db.aluno.cpf.readable = True
@@ -128,12 +133,13 @@ def aluno_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+@auth.requires_login()
 def aluno_apagar():
     db(Aluno.id==request.args(0, cast=int)).delete()
     session.flash = 'Aluno apagado!'
     redirect(URL('aluno_ver'))
 
-
+@auth.requires_login()
 def aluno_detalhe():
     '''
     Aqui o request.arg (0) pega o parametro URL e executa o select no banco de
@@ -145,6 +151,7 @@ def aluno_detalhe():
 
 # ---- CRUD PROFESSOR -----
 
+@auth.requires_login()
 def professor_cadastro():
     form = SQLFORM(Professor)
     if form.process().accepted:
@@ -157,7 +164,7 @@ def professor_cadastro():
             response.flash = 'Preencha o formulário'
     return dict(form=form)
 
-
+@auth.requires_login()
 def professor_ver():
     if 'edit' in request.args:
         edit = request.args
@@ -184,7 +191,7 @@ def professor_ver():
                        csv=False, xml=False, json=False))
     return dict(grid=grid)
 
-# @auth.requires_login()
+@auth.requires_login()
 def professor_editar():
     form = SQLFORM(Professor, request.args(0, cast=int),)
     if form.process().accepted:
@@ -197,11 +204,13 @@ def professor_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+@auth.requires_login()
 def professor_apagar():
     db(Professor.id==request.args(0, cast=str)).delete()
     session.flash = 'Professor apagado!'
     redirect(URL('professor_ver'))
 
+@auth.requires_login()
 def professor_detalhe():
     professor_detalhe = db(Professor.id == request.args(0)).select()
     return dict(professor_detalhe=professor_detalhe)
@@ -209,6 +218,7 @@ def professor_detalhe():
 
 # ---- CRUD EMPRESA -----
 
+@auth.requires_login()
 def empresa_cadastro():
     form = SQLFORM(Empresa)
     if form.process().accepted:
@@ -221,7 +231,7 @@ def empresa_cadastro():
             response.flash = 'Preencha o formulário'
     return dict(form=form)
 
-
+@auth.requires_login()
 def empresa_ver():
     if 'edit' in request.args:
         edit = request.args
@@ -248,7 +258,7 @@ def empresa_ver():
                        csv=False, xml=False, json=False))
     return dict(grid=grid)
 
-# @auth.requires_login()
+@auth.requires_login()
 def empresa_editar():
     form = SQLFORM(Empresa, request.args(0, cast=int),)
     if form.process().accepted:
@@ -261,11 +271,13 @@ def empresa_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+@auth.requires_login()
 def empresa_apagar():
     db(Empresa.id==request.args(0, cast=int)).delete()
     session.flash = 'Empresa apagada!'
     redirect(URL('empresa_ver'))
 
+@auth.requires_login()
 def empresa_detalhe():
     empresa_detalhe = db(Empresa.id == request.args(0)).select()
     return dict(empresa_detalhe=empresa_detalhe)
@@ -273,6 +285,7 @@ def empresa_detalhe():
 
 # ---- CRUD ESTÁGIO -----
 
+@auth.requires_login()
 def estagio_cadastro():
     form = SQLFORM(Estagio)
     if form.process().accepted:
@@ -285,7 +298,7 @@ def estagio_cadastro():
             response.flash = 'Preencha o formulário'
     return dict(form=form)
 
-
+@auth.requires_login()
 def estagio_ver():
     if 'edit' in request.args:
         edit = request.args
@@ -300,7 +313,7 @@ def estagio_ver():
         url = 'estagio_detalhe/' + str(parametro)
         redirect(URL(url))
 
-    grid = SQLFORM.grid(Estagio, create=False, advanced_search = False,
+    grid = SQLFORM.grid(Estagio, create=False, advanced_search = True,
     fields=[
             db.estagio.aluno,
             db.estagio.empresa,
@@ -314,7 +327,7 @@ def estagio_ver():
                        csv=False, xml=False, json=False))
     return dict(grid=grid)
 
-# @auth.requires_login()
+@auth.requires_login()
 def estagio_editar():
     form = SQLFORM(Estagio, request.args(0, cast=int),)
     if form.process().accepted:
@@ -327,11 +340,13 @@ def estagio_editar():
             response.flash = 'Atualização de dados'
     return dict(form=form)
 
+@auth.requires_login()
 def estagio_apagar():
     db(Estagio.id==request.args(0, cast=int)).delete()
     session.flash = 'Estagio removido!'
     redirect(URL('estagio_ver'))
 
+@auth.requires_login()
 def estagio_detalhe():
     estagio_detalhe = db(Estagio.id == request.args(0)).select()
     return dict(estagio_detalhe=estagio_detalhe)
