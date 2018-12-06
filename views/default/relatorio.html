@@ -1,0 +1,128 @@
+{{extend 'layout.html'}}
+
+
+<body>
+
+  {{include 'navbar.html'}}
+<br><br><br><br>
+  <div class="container">
+
+    <div class="row">
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Aluno</span>
+              <p>Relatório gerencial do aluno. Aqui é possivel filtrar informações dos alunos
+                cadastrados a nível gerencial.</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','aluno_rep')}}">Acessar</a>
+              <a href="{{=URL('default','suporte')}}">Gráfico</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Professor</span>
+              <p>Relatório gerencial do professor. Aqui é possivel filtrar informações dos professores
+                cadastrados a nível gerencial.</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','suporte')}}">Acessar</a>
+              <a href="{{=URL('default','suporte')}}">Gráfico</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Empresa</span>
+              <p>Relatório gerencial da empresa. Acesse informações das empresas cadastradas, visualize a nível gerencial.</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','empresa_rep')}}">Acessar</a>
+              <a href="{{=URL('default','suporte')}}">Gráficos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Estágios</span>
+              <p>Relatório gerencial da estágios. Acesse informações do histórico dos estágios,
+                visualize a nível gerencial. Visualizar as empresas que mais geram estágios.</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','estagio_rep')}}">Acessar</a>
+              <a href="{{=URL('default','suporte')}}">Gráficos</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Reservado</span>
+              <p>Esse cartão está reservado para o futuro, de acordo com as necessidades gerenciais da instituição.
+              Esses links não fazem nada. Esse cartão é responsivo!</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','suporte')}}">Isso é um link</a>
+              <a href="{{=URL('default','suporte')}}">Isso é um link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+
+      <div class="col s4">
+        <div class="row">
+        <div class="col">
+          <div class="card teal lighten-2 darken-1">
+            <div class="card-content white-text">
+              <span class="card-title">Reservado</span>
+              <p>Esse cartão está reservado para o futuro, de acordo com as necessidades gerenciais da instituição.
+              Esses links não fazem nada. Esse cartão é responsivo!</p>
+            </div>
+            <div class="card-action">
+              <a href="{{=URL('default','suporte')}}">Isso é um link</a>
+              <a href="{{=URL('default','suporte')}}">Isso é um link</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      </div>
+    </div>
+
+
+  </div>
+
+  <br><br><br>
+  {{include 'footer.html'}}
+
+</body>

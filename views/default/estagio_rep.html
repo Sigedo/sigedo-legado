@@ -1,0 +1,21 @@
+{{extend 'layout.html'}}
+{{# -*- coding:utf-8 -*- }}
+{{include 'navbar.html'}}
+
+<body class="grey lighten-3">
+	<link rel="stylesheet" href="{{=URL('static','css/web2py-bootstrap4.css')}}"/>
+	<div class="container">
+		<br>
+		<h5 class="header col s12 light">Visualizar relatório gerencial de estágio</h5>
+	</div>
+<br><br>
+<div class="row">
+	<div class="col s12">
+	<div class="card-panel"><br>
+		{{=grid}}
+		<br>
+	</div>
+</div>
+</div>
+<br><br><br>
+</body>
