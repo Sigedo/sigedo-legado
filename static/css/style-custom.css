@@ -9,3 +9,181 @@
 .error {
   color: red;
 }
+
+#auth_user_remember_me__label{
+  display: none;
+}
+
+/* Customização de pesquisa para aluno */
+#w2p_value_aluno-id{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-cpf{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-identidade{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-identidade{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-matricula{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-nome{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-nome{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-data_nascimento{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-periodo{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-endereco{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-email{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_aluno-telefone{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+
+#w2p_value_aluno-telefone{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+/* Customização de pesquisa para estágio */
+
+#w2p_value_estagio-id{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-supervisor{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-data_inicio{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-data_fim{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-semestre{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-ano{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_estagio-observacao{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+/* Customização de pesquisa para empresa */
+
+#w2p_value_empresa-id{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-cnpj{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-razao{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-nome{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-email{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-telefone{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-endereco{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
+
+#w2p_value_empresa-termo{
+  width: 20%;
+  display: inline;
+  height: 32px;
+}
