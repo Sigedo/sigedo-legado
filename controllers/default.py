@@ -5,8 +5,6 @@
 # -------------------------------------------------------------------------
 
 
-
-
 # ---- index page ----
 
 def index():
@@ -63,6 +61,7 @@ def user():
 #     grid = SQLFORM.grid(db.auth_user)
 #     return dict(grid=grid)
 
+
 # ---- action to server uploaded static content (required) ---
 @cache.action()
 def download():
@@ -71,7 +70,6 @@ def download():
     http://..../[app]/default/download/[filename]
     """
     return response.download(request, db)
-
 
 # ---- CRUD ALUNO -----
 
@@ -113,6 +111,15 @@ def aluno_ver():
             db.aluno.periodo,
             db.aluno.email,
             ],
+            maxtextlength=30,
+    exportclasses=dict(tsv_with_hidden_cols=False,
+                       csv=False, xml=False, json=False))
+    return dict(grid=grid)
+
+@auth.requires_login()
+def aluno_rep():
+    grid = SQLFORM.grid(Aluno, deletable=False, editable=False, details=False,
+    create=False, advanced_search = True, orderby=db.aluno.nome,
             maxtextlength=30,
     exportclasses=dict(tsv_with_hidden_cols=False,
                        csv=False, xml=False, json=False))
@@ -259,6 +266,15 @@ def empresa_ver():
     return dict(grid=grid)
 
 @auth.requires_login()
+def empresa_rep():
+    grid = SQLFORM.grid(Empresa, deletable=False, editable=False, details=False,
+    create=False, advanced_search = True, maxtextlength=30,
+    exportclasses=dict(tsv_with_hidden_cols=False,
+                       csv=False, xml=False, json=False))
+    return dict(grid=grid)
+
+
+@auth.requires_login()
 def empresa_editar():
     form = SQLFORM(Empresa, request.args(0, cast=int),)
     if form.process().accepted:
@@ -328,6 +344,14 @@ def estagio_ver():
     return dict(grid=grid)
 
 @auth.requires_login()
+def estagio_rep():
+    grid = SQLFORM.grid(Estagio, deletable=False, editable=False, details=False,
+    create=False, advanced_search = True, maxtextlength=30,
+    exportclasses=dict(tsv_with_hidden_cols=False,
+                       csv=False, xml=False, json=False))
+    return dict(grid=grid)
+
+@auth.requires_login()
 def estagio_editar():
     form = SQLFORM(Estagio, request.args(0, cast=int),)
     if form.process().accepted:
@@ -350,3 +374,9 @@ def estagio_apagar():
 def estagio_detalhe():
     estagio_detalhe = db(Estagio.id == request.args(0)).select()
     return dict(estagio_detalhe=estagio_detalhe)
+
+# ---- PÁGINA DE RELATÓRIO -----
+
+@auth.requires_login()
+def relatorio():
+    return dict()
